@@ -1,6 +1,5 @@
 // src/ui/components/sections/ServicesSection.tsx
 import { useRef } from 'react';
-// IMPORTANTE: Instala lucide-react si no lo tienes (npm install lucide-react)
 import { ShieldCheck, Target, Lightbulb, Shuffle } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -35,7 +34,7 @@ export const ServicesSection = () => {
       opacity: 0,
       duration: 1,
       stagger: 0.15,
-      ease: 'back.out(1.2)', // Le da un pequeño rebote premium
+      ease: 'back.out(1.2)',
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top 65%',
@@ -48,24 +47,22 @@ export const ServicesSection = () => {
     <section
       id="servicios"
       ref={sectionRef}
-      // Mantenemos el padding pt-48 para no chocar con el logo global que programamos antes
-      className="relative min-h-screen flex flex-col items-center justify-center pt-32 md:pt-48 pb-32 z-0 bg-[#050505] overflow-hidden">      <div className="max-w-[1400px] mx-auto px-6 w-full z-10 relative">
+      className="relative min-h-screen flex flex-col items-center justify-center pt-32 md:pt-48 pb-32 z-0 bg-[#050505] overflow-hidden"
+    >
+      <div className="max-w-[1400px] mx-auto px-6 w-full z-10 relative">
 
         <div ref={headerRef} className="mb-20 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">
-            Nuestros <span className="text-[#01a2d8] drop-shadow-[0_0_15px_rgba(1,162,216,0.4)]">Pilares</span>
+          {/* JOSHUA: Aquí aplicamos Bebas Neue, mayúsculas y tamaño masivo */}
+          <h2 className="font-bebas text-7xl md:text-8xl tracking-normal mb-4 text-center leading-[0.9] text-white">
+            NUESTROS <span className="text-[#01a2d8] drop-shadow-[0_0_15px_rgba(1,162,216,0.6)]">PILARES</span>
           </h2>
-          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+          {/* El párrafo conserva la fuente Inter automáticamente y se separa un poco más del título gigante */}
+          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto mt-6">
             Fundamentos tecnológicos diseñados para estructurar y escalar ecosistemas de alto rendimiento.
           </p>
         </div>
 
-        {/* 
-          GRILLA RESPONSIVE
-          1 columna en móviles, 2 en tablets (md), 4 en laptops grandes (lg)
-        */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-
           <div className="service-card-wrapper">
             <NeonServiceCard
               title="Calidad"
@@ -101,7 +98,6 @@ export const ServicesSection = () => {
               icon={<Shuffle size={24} strokeWidth={1.5} />}
             />
           </div>
-
         </div>
 
       </div>

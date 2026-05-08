@@ -1,9 +1,15 @@
 // src/ui/components/layout/Navbar.tsx
 import { memo, useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+// JOSHUA: Importamos los radares de React Router
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Navbar = memo(() => {
     const [isOpen, setIsOpen] = useState(false);
+
+    // Inicializamos el GPS
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // Bloqueamos el scroll del fondo cuando el menú móvil está abierto
     useEffect(() => {
@@ -15,24 +21,56 @@ export const Navbar = memo(() => {
         return () => { document.body.style.overflow = 'unset'; };
     }, [isOpen]);
 
-    // 🔥 LA SOLUCIÓN: Controlador de Scroll Suave
-    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-        e.preventDefault(); // Evitamos el teletransporte brusco por defecto de HTML
-        setIsOpen(false);   // Si estamos en móvil, cerramos el menú al hacer clic
+    // 🔥 EFECTO MÁGICO: Si la URL tiene un # (ej: localhost:5173/#servicios)
+    // este useEffect espera a que cargue la página principal y hace scroll automáticamente.
+    useEffect(() => {
+        if (location.pathname === '/' && location.hash) {
+            // Le damos 100ms a React para que dibuje el DOM antes de intentar scrollear
+            setTimeout(() => {
+                const targetElement = document.querySelector(location.hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+                }
+            }, 100);
+        }
+    }, [location]);
 
-        // Si el objetivo es el inicio ("#"), scrolleamos suavemente hasta la cima absoluta
+    // 🔥 LA SOLUCIÓN: Controlador de Scroll Suave y Enrutamiento Inteligente
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+        e.preventDefault();
+        setIsOpen(false);
+
+        const isHome = location.pathname === '/';
+
+        // 1. Si el objetivo es el inicio ("#")
         if (targetId === '#') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (isHome) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                // Si estamos en un proyecto, volvemos a la raíz
+                navigate('/');
+                setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+            }
             return;
         }
 
-        // Si es una sección (#servicios, etc), buscamos el elemento y nos deslizamos hacia él
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start', // Alinea la sección en la parte superior de la pantalla
-            });
+        // 2. Si el objetivo es una sección específica (#servicios, #proyectos)
+        if (isHome) {
+            // Si ya estamos en el home, solo bajamos
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+            }
+        } else {
+            // Si estamos en un proyecto, ordenamos navegar al Home agregando el hash (ej: /#servicios)
+            // El useEffect de arriba se encargará de hacer el scroll al llegar.
+            navigate(`/${targetId}`);
         }
     };
 
@@ -41,7 +79,6 @@ export const Navbar = memo(() => {
             <header className="fixed top-0 left-0 w-full z-[100] px-6 py-4 flex items-center justify-between backdrop-blur-md bg-black/40 border-b border-white/5">
 
                 {/* Contenedor del "Logo" en Texto */}
-                {/* Le agregamos el evento onClick que llama a nuestra función de scroll */}
                 <a href="#" onClick={(e) => handleNavClick(e, '#')} className="flex items-center cursor-pointer group z-50">
                     <span className="text-lg md:text-xl font-bold tracking-[0.2em] text-white uppercase group-hover:text-[#01a2d8] transition-colors duration-300 drop-shadow-md">
                         Inicio
@@ -53,8 +90,9 @@ export const Navbar = memo(() => {
                     <a href="#servicios" onClick={(e) => handleNavClick(e, '#servicios')} className="hover:text-[#01a2d8] transition-colors duration-300">
                         Servicios
                     </a>
-                    <a href="#arquitectura" onClick={(e) => handleNavClick(e, '#arquitectura')} className="hover:text-[#01a2d8] transition-colors duration-300">
-                        Arquitectura
+                    {/* JOSHUA: Cambié #arquitectura por #proyectos para que coincida con el ID real de tu sección */}
+                    <a href="#proyectos" onClick={(e) => handleNavClick(e, '#proyectos')} className="hover:text-[#01a2d8] transition-colors duration-300">
+                        Experiencia
                     </a>
                     <a href="#contacto" onClick={(e) => handleNavClick(e, '#contacto')} className="hover:text-[#01a2d8] transition-colors duration-300">
                         Contacto
@@ -85,8 +123,9 @@ export const Navbar = memo(() => {
                     <a href="#servicios" onClick={(e) => handleNavClick(e, '#servicios')} className="hover:text-[#01a2d8] transition-colors">
                         Servicios
                     </a>
-                    <a href="#arquitectura" onClick={(e) => handleNavClick(e, '#arquitectura')} className="hover:text-[#01a2d8] transition-colors">
-                        Arquitectura
+                    {/* JOSHUA: Igual aquí en el menú móvil, apuntamos a #proyectos */}
+                    <a href="#proyectos" onClick={(e) => handleNavClick(e, '#proyectos')} className="hover:text-[#01a2d8] transition-colors">
+                        Experiencia
                     </a>
                     <a href="#contacto" onClick={(e) => handleNavClick(e, '#contacto')} className="hover:text-[#01a2d8] transition-colors">
                         Contacto
