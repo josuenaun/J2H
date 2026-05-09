@@ -83,7 +83,8 @@ export const ProjectsSection = () => {
         <section
             id="proyectos"
             ref={sectionRef}
-            className="relative bg-[#050505] text-white border-t border-white/5"
+            // JOSHUA: Eliminamos bg-[#050505] y lo dejamos en bg-transparent
+            className="relative bg-transparent text-white border-t border-white/5"
         >
             <div className="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row relative">
 
@@ -134,11 +135,7 @@ export const ProjectsSection = () => {
                                     ))}
                                 </div>
 
-                                {/* JOSHUA: CORRECCIÓN DE PRECISIÓN DE CLIC */}
-                                {/* Ahora el contenedor principal es un simple div inerte */}
                                 <div className="flex flex-row-reverse items-center p-1">
-
-                                    {/* 1. LA FLECHA ES EL ÚNICO BOTÓN. El onClick y el cursor-pointer solo viven aquí */}
                                     <button
                                         onClick={() => handleProjectClick(project.id)}
                                         className="peer w-10 h-10 rounded-full border border-white flex items-center justify-center bg-transparent transition-all duration-300 hover:scale-110 hover:bg-[#01a2d8] hover:border-[#01a2d8] cursor-pointer"
@@ -147,7 +144,6 @@ export const ProjectsSection = () => {
                                         <ArrowDownRight className="text-white w-5 h-5" strokeWidth={2} />
                                     </button>
 
-                                    {/* 2. EL TEXTO ES DECORATIVO. Le añadí cursor-default para que el mouse no parezca una "manito" de clic al pasar por encima */}
                                     <span className="font-bebas text-xl tracking-wider text-white overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out max-w-[100px] mr-3 peer-hover:max-w-0 peer-hover:mr-0 peer-hover:opacity-0 cursor-default select-none">
                                         CLICK ME
                                     </span>

@@ -13,7 +13,6 @@ export const ServicesSection = () => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // 1. Animación del Título
     gsap.from(headerRef.current?.children || [], {
       y: 40,
       opacity: 0,
@@ -27,7 +26,6 @@ export const ServicesSection = () => {
       }
     });
 
-    // 2. Aparición de las Tarjetas de Neón en Cascada
     const cards = gsap.utils.toArray('.service-card-wrapper');
     gsap.from(cards, {
       y: 100,
@@ -47,16 +45,15 @@ export const ServicesSection = () => {
     <section
       id="servicios"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center pt-32 md:pt-48 pb-32 z-0 bg-[#050505] overflow-hidden"
+      // JOSHUA: Cambiamos bg-[#050505] por bg-transparent
+      className="relative min-h-screen flex flex-col items-center justify-center pt-32 md:pt-48 pb-32 z-0 bg-transparent overflow-hidden"
     >
       <div className="max-w-[1400px] mx-auto px-6 w-full z-10 relative">
 
         <div ref={headerRef} className="mb-20 text-center">
-          {/* JOSHUA: Aquí aplicamos Bebas Neue, mayúsculas y tamaño masivo */}
           <h2 className="font-bebas text-7xl md:text-8xl tracking-normal mb-4 text-center leading-[0.9] text-white">
             NUESTROS <span className="text-[#01a2d8] drop-shadow-[0_0_15px_rgba(1,162,216,0.6)]">PILARES</span>
           </h2>
-          {/* El párrafo conserva la fuente Inter automáticamente y se separa un poco más del título gigante */}
           <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto mt-6">
             Fundamentos tecnológicos diseñados para estructurar y escalar ecosistemas de alto rendimiento.
           </p>

@@ -1,33 +1,64 @@
 // src/ui/pages/Home.tsx
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
 import TextType from '../components/common/TextType';
 import { VideoBackground } from '../components/layout/VideoBackground';
 import { ServicesSection } from '../components/sections/ServicesSection';
 import { ProjectsSection } from '../components/sections/ProjectsSection';
 import { GlobalFluidLogo } from '../components/common/GlobalFluidLogo';
 
-export const Home = () => {
+gsap.registerPlugin(ScrollTrigger);
 
-    // JOSHUA: Esto asegura que si haces clic en "VOLVER", 
-    // regreses exactamente a la portada de arriba y no al final de la página.
+export const Home = () => {
+    // JOSHUA: Referencia para el contenedor que vamos a "quebrar"
+    const shatterContainerRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    useGSAP(() => {
+        gsap.to(shatterContainerRef.current, {
+            scrollTrigger: {
+                trigger: "#hero-section",
+                // JOSHUA: Cambiamos el start. Ahora la animación arranca INMEDIATAMENTE
+                // cuando haces un mínimo scroll hacia abajo.
+                start: "top top",
+                // JOSHUA: Y termina mucho antes (al 25% de la pantalla en lugar de al centro)
+                end: "25% top",
+                scrub: 1,
+            },
+            y: 150,
+            rotationZ: -12,
+            rotationX: 60,
+            scale: 0.8,
+            opacity: 0,
+            ease: "power3.in"
+        });
+    }, []);
+
     return (
         <>
-            {/* JOSHUA: El Logo Mágico ahora vive aquí adentro. 
-                Así, al cambiar de página, se destruye ordenadamente y GSAP no colapsa. */}
+            {/* JOSHUA: El logo vuelve a estar libre sin envoltorios que lo tapen */}
             <GlobalFluidLogo />
 
             <section
                 id="hero-section"
-                className="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden border-b border-white/5 pt-32 px-6 pb-32"
+                // Agregamos perspective-[1200px] para que la caída hacia atrás en 3D (rotationX) se vea realista
+                className="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden border-b border-white/5 pt-32 px-6 pb-32 perspective-[1200px]"
             >
                 <VideoBackground className="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none" />
 
                 <div className="relative z-20 flex flex-col items-center justify-center text-center max-w-[1200px] mx-auto w-full h-full">
-                    <div className="mt-48 md:mt-64 flex flex-col items-center w-full pointer-events-none gap-5">
+
+                    {/* Contenedor que recibirá el impacto */}
+                    <div
+                        ref={shatterContainerRef}
+                        className="mt-48 md:mt-64 flex flex-col items-center w-full pointer-events-none gap-5 will-change-transform origin-bottom"
+                    >
                         <p className="text-white/40 text-xs md:text-sm tracking-[0.4em] font-light uppercase">
                             Software a tu medida
                         </p>
@@ -45,9 +76,11 @@ export const Home = () => {
                             />
                         </div>
                     </div>
+
                 </div>
             </section>
 
+            {/* JOSHUA: Estas secciones ya no tienen el div relative encima, por lo que el logo bajará sobre ellas sin problemas */}
             <ServicesSection />
             <ProjectsSection />
         </>
