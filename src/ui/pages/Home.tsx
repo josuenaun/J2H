@@ -9,6 +9,8 @@ import { VideoBackground } from '../components/layout/VideoBackground';
 import { ServicesSection } from '../components/sections/ServicesSection';
 import { ProjectsSection } from '../components/sections/ProjectsSection';
 import { GlobalFluidLogo } from '../components/common/GlobalFluidLogo';
+import { ContactSection } from '../components/sections/ContactSection';
+import { TrustedBySection } from '../components/sections/TrustedBySection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,6 +85,8 @@ export const Home = () => {
             {/* JOSHUA: Estas secciones ya no tienen el div relative encima, por lo que el logo bajará sobre ellas sin problemas */}
             <ServicesSection />
             <ProjectsSection />
+            <TrustedBySection />
+            <ContactSection />
         </>
     );
 };

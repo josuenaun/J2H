@@ -7,11 +7,12 @@ import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(ScrollTrigger);
 
 export const GlobalFluidLogo = () => {
-    const [activeSection, setActiveSection] = useState<'hero' | 'services' | 'projects'>('hero');
+    // JOSHUA: 1. Agregamos 'clients' a la lista de secciones
+    const [activeSection, setActiveSection] = useState<'hero' | 'services' | 'projects' | 'clients' | 'contact'>('hero');
     const imgRef = useRef<HTMLImageElement>(null);
 
     useGSAP(() => {
-        // 1. RADAR PARA SERVICIOS
+        // RADAR SERVICIOS
         ScrollTrigger.create({
             trigger: "#servicios",
             start: "top 35%",
@@ -19,15 +20,32 @@ export const GlobalFluidLogo = () => {
             onLeaveBack: () => setActiveSection('hero'),
         });
 
-        // 2. RADAR PARA PROYECTOS
+        // RADAR PROYECTOS
         ScrollTrigger.create({
             trigger: "#proyectos",
-            start: "top 35%",
+            start: "top 70%",
             onEnter: () => setActiveSection('projects'),
             onLeaveBack: () => setActiveSection('services'),
         });
 
-        // 3. PARALLAX MAGNÉTICO (Mouse)
+        // JOSHUA: 2. NUEVO RADAR PARA CLIENTES
+        ScrollTrigger.create({
+            trigger: "#clientes",
+            start: "top 72%", // Se esconde apenas asoma el carrusel
+            onEnter: () => setActiveSection('clients'),
+            onLeaveBack: () => setActiveSection('projects'),
+        });
+
+        // RADAR CONTACTO
+        ScrollTrigger.create({
+            trigger: "#contacto",
+            start: "top 80%",
+            onEnter: () => setActiveSection('contact'),
+            // Ahora si subes desde contacto, regresas a clientes
+            onLeaveBack: () => setActiveSection('clients'),
+        });
+
+        // PARALLAX MAGNÉTICO
         let mmParallax = gsap.matchMedia();
         mmParallax.add("(min-width: 768px)", () => {
             const xTo = gsap.quickTo(imgRef.current, "rotationY", { duration: 0.8, ease: "power3.out" });
@@ -64,6 +82,12 @@ export const GlobalFluidLogo = () => {
 
             case 'projects':
                 return "top-[65vh] md:top-[65vh] left-[50vw] md:left-[20vw] -translate-x-1/2 -translate-y-1/2 w-[280px] md:w-[400px] opacity-100 rotate-0";
+
+            // JOSHUA: 3. Unificamos la animación. 
+            // Si estás en clientes O en contacto, el logo se vuelve un fantasma.
+            case 'clients':
+            case 'contact':
+                return "top-[15vh] md:top-[15vh] left-[15vw] md:left-[15vw] -translate-x-1/2 -translate-y-1/2 w-[180px] md:w-[250px] opacity-[0.03] -rotate-12";
 
             default:
                 return "top-[28vh] left-[50vw] -translate-x-1/2 -translate-y-1/2 w-[450px] opacity-100 rotate-0";
