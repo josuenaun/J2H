@@ -1,5 +1,6 @@
 // src/ui/components/layout/VideoBackground.tsx
 import { memo } from 'react';
+import heroVideo from '../../../assets/hero-bg.webm'
 
 interface VideoBackgroundProps {
     className?: string;
@@ -27,7 +28,7 @@ export const VideoBackground = memo(({ className = '' }: VideoBackgroundProps) =
                 playsInline
                 className="absolute top-1/2 left-1/2 w-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-80"
             >
-                <source src="/assets/hero-bg.webm" type="video/webm" />
+                <source src={heroVideo} type="video/webm" />
                 {/* Tu navegador M5 reproducirá WebM sin problemas, pero siempre es buena práctica dejar este espacio */}
             </video>
         </div>

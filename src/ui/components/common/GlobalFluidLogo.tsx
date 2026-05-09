@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import logoJ2H from '../../../assets/j2h-nexus-core.webp'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,7 +102,7 @@ export const GlobalFluidLogo = () => {
             >
                 <img
                     ref={imgRef}
-                    src="/assets/j2h-nexus-core.webp"
+                    src={logoJ2H}
                     alt="J2H Nexus Core Architecture"
                     fetchPriority="high"
                     className="w-full h-full object-contain"
