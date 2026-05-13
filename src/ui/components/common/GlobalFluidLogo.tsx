@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import logoJ2H from '../../../assets/j2h-nexus-core.webp'
+import logoJ2H from '../../../assets/j2h-nexus-core.png'
 
 gsap.registerPlugin(ScrollTrigger);
 

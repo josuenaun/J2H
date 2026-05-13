@@ -90,7 +90,6 @@ export const Navbar = memo(() => {
                     <a href="#servicios" onClick={(e) => handleNavClick(e, '#servicios')} className="hover:text-[#01a2d8] transition-colors duration-300">
                         Servicios
                     </a>
-                    {/* JOSHUA: Cambié #arquitectura por #proyectos para que coincida con el ID real de tu sección */}
                     <a href="#proyectos" onClick={(e) => handleNavClick(e, '#proyectos')} className="hover:text-[#01a2d8] transition-colors duration-300">
                         Experiencia
                     </a>
@@ -99,10 +98,14 @@ export const Navbar = memo(() => {
                     </a>
                 </nav>
 
-                {/* Botón CTA Escritorio */}
-                <button className="hidden md:block px-5 py-2 text-sm font-medium bg-[#01a2d8] text-black rounded-full hover:bg-white transition-colors duration-300">
+                {/* Botón CTA Escritorio (AHORA CON SCROLL SUAVE) */}
+                <a
+                    href="#contacto"
+                    onClick={(e) => handleNavClick(e, '#contacto')}
+                    className="hidden md:block px-5 py-2 text-sm font-medium bg-[#01a2d8] text-black rounded-full hover:bg-white transition-colors duration-300"
+                >
                     Iniciar Proyecto
-                </button>
+                </a>
 
                 {/* Botón Hamburguesa (Solo visible en móvil) */}
                 <button
@@ -123,16 +126,20 @@ export const Navbar = memo(() => {
                     <a href="#servicios" onClick={(e) => handleNavClick(e, '#servicios')} className="hover:text-[#01a2d8] transition-colors">
                         Servicios
                     </a>
-                    {/* JOSHUA: Igual aquí en el menú móvil, apuntamos a #proyectos */}
                     <a href="#proyectos" onClick={(e) => handleNavClick(e, '#proyectos')} className="hover:text-[#01a2d8] transition-colors">
                         Experiencia
                     </a>
                     <a href="#contacto" onClick={(e) => handleNavClick(e, '#contacto')} className="hover:text-[#01a2d8] transition-colors">
                         Contacto
                     </a>
-                    <button className="mt-4 px-8 py-3 text-lg font-medium bg-[#01a2d8] text-black rounded-full hover:bg-white transition-colors">
+                    {/* Botón CTA Móvil (CONVERTIDO EN ENLACE CON SCROLL SUAVE) */}
+                    <a
+                        href="#contacto"
+                        onClick={(e) => handleNavClick(e, '#contacto')}
+                        className="mt-4 px-8 py-3 text-lg font-medium text-center bg-[#01a2d8] text-black rounded-full hover:bg-white transition-colors"
+                    >
                         Iniciar Proyecto
-                    </button>
+                    </a>
                 </nav>
             </div>
         </>
