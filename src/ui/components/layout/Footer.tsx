@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-// 🔥 1. Solo importamos Mail, que es un ícono nativo y seguro.
+// 🔥 Solo importamos Mail, que es un ícono nativo y seguro.
 import { Mail } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,7 +48,7 @@ export const Footer = () => {
                         </p>
                         <div className="flex gap-4">
 
-                            {/* 🔥 2. SVGs PUROS PARA REDES SOCIALES (A prueba de errores) */}
+                            {/* SVGs PUROS PARA REDES SOCIALES */}
 
                             {/* LINKEDIN */}
                             <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-[#01a2d8] hover:bg-[#01a2d8]/10 hover:border-[#01a2d8]/30 transition-all" aria-label="LinkedIn">
@@ -83,9 +83,15 @@ export const Footer = () => {
                     <div className="col-span-1 md:col-span-3 footer-anim">
                         <h3 className="text-white font-medium tracking-widest uppercase text-sm mb-6">Contacto</h3>
                         <ul className="flex flex-col gap-4">
+                            {/* 🔥 EMAIL ACTUALIZADO */}
                             <li className="flex items-start gap-3 text-white/50 text-sm">
                                 <Mail size={16} className="mt-0.5 text-[#01a2d8]" />
-                                <a href="mailto:contacto@j2h.com" className="hover:text-white transition-colors">contacto@j2h.com</a>
+                                <a href="mailto:contacto@j2hsoft.com" className="hover:text-white transition-colors">contacto@j2hsoft.com</a>
+                            </li>
+                            {/* 🔥 TELÉFONO AÑADIDO AL FOOTER */}
+                            <li className="flex items-start gap-3 text-white/50 text-sm">
+                                <span className="text-[#01a2d8] font-bold mt-0.5 text-xs border border-[#01a2d8]/30 px-1.5 py-0.5 rounded bg-[#01a2d8]/10">TEL</span>
+                                <a href="tel:+51946215658" className="hover:text-white transition-colors">+51 946 215 658</a>
                             </li>
                             <li className="flex items-start gap-3 text-white/50 text-sm">
                                 <span className="text-[#01a2d8] font-bold mt-0.5 text-xs border border-[#01a2d8]/30 px-1.5 py-0.5 rounded bg-[#01a2d8]/10">PE</span>

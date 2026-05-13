@@ -28,20 +28,16 @@ export const ContactSection = () => {
         });
     }, { scope: sectionRef });
 
-    // Simulación de envío del formulario
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulamos que tarda 1.5 segundos en enviar al servidor
         setTimeout(() => {
             setIsSubmitting(false);
             setIsSent(true);
 
-            // Regresamos el botón a su estado normal después de 3 segundos
             setTimeout(() => {
                 setIsSent(false);
-                // Aquí podrías resetear el formulario si lo deseas
             }, 3000);
         }, 1500);
     };
@@ -79,8 +75,9 @@ export const ContactSection = () => {
                             </div>
                             <div>
                                 <p className="text-white/40 text-sm font-medium tracking-wider uppercase mb-1">Email</p>
-                                <a href="mailto:contacto@j2h.com" className="text-white text-lg hover:text-[#01a2d8] transition-colors">
-                                    contacto@j2h.com
+                                {/* 🔥 EMAIL ACTUALIZADO */}
+                                <a href="mailto:contacto@j2hsoft.com" className="text-white text-lg hover:text-[#01a2d8] transition-colors">
+                                    contacto@j2hsoft.com
                                 </a>
                             </div>
                         </div>
@@ -92,8 +89,9 @@ export const ContactSection = () => {
                             </div>
                             <div>
                                 <p className="text-white/40 text-sm font-medium tracking-wider uppercase mb-1">Línea Directa</p>
-                                <a href="tel:+51999999999" className="text-white text-lg hover:text-[#01a2d8] transition-colors">
-                                    +51 999 999 999
+                                {/* 🔥 TELÉFONO ACTUALIZADO */}
+                                <a href="tel:+51946215658" className="text-white text-lg hover:text-[#01a2d8] transition-colors">
+                                    +51 946 215 658
                                 </a>
                             </div>
                         </div>
@@ -166,8 +164,8 @@ export const ContactSection = () => {
                             type="submit"
                             disabled={isSubmitting || isSent}
                             className={`w-full py-4 rounded-xl font-medium tracking-wide flex items-center justify-center gap-3 transition-all duration-300 ${isSent
-                                    ? 'bg-green-500/20 text-green-400 border border-green-500/50'
-                                    : 'bg-[#01a2d8] text-black hover:bg-white hover:text-black shadow-[0_0_20px_rgba(1,162,216,0.3)]'
+                                ? 'bg-green-500/20 text-green-400 border border-green-500/50'
+                                : 'bg-[#01a2d8] text-black hover:bg-white hover:text-black shadow-[0_0_20px_rgba(1,162,216,0.3)]'
                                 }`}
                         >
                             {isSubmitting ? (

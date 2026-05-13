@@ -4,58 +4,105 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import LogoLoop from '../common/LogoLoop';
-import { Briefcase, Building2, Globe2, Layers, Cpu, MonitorPlay } from 'lucide-react';
+// 🔥 Importamos los íconos específicos para cada rubro de tus clientes
+import { Flame, Drumstick, UtensilsCrossed, ChefHat, Bird, Egg, Dumbbell } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// JOSHUA: Aquí puedes cambiar los nombres e íconos por las imágenes reales de tus clientes luego.
-// Por ahora, usé componentes de texto tipográficos y Lucide para que se vea ultra premium.
 const clientLogos = [
     {
         node: (
             <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
-                <Building2 size={28} />
-                <span className="font-bebas text-3xl tracking-widest mt-1">EMPRESA ALPHA</span>
+                <UtensilsCrossed size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">POLLERÍA EXCELENCIA</span>
             </div>
         )
     },
     {
         node: (
             <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
-                <MonitorPlay size={28} />
-                <span className="font-bebas text-3xl tracking-widest mt-1">NEXUS FITNESS</span>
+                <Flame size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">POLLERÍA LEÑOS</span>
             </div>
         )
     },
     {
         node: (
             <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
-                <Layers size={28} />
-                <span className="font-bebas text-3xl tracking-widest mt-1">TECH LOGISTICS</span>
+                <Drumstick size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">POLLERÍA COSAMÍA</span>
             </div>
         )
     },
     {
         node: (
             <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
-                <Globe2 size={28} />
-                <span className="font-bebas text-3xl tracking-widest mt-1">GLOBAL AGRO</span>
+                <Drumstick size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">BUNN CHICKEN</span>
             </div>
         )
     },
     {
         node: (
             <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
-                <Briefcase size={28} />
-                <span className="font-bebas text-3xl tracking-widest mt-1">GRUPO CORPORATIVO</span>
+                <UtensilsCrossed size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">GRAN CHICKEN</span>
             </div>
         )
     },
     {
         node: (
             <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
-                <Cpu size={28} />
-                <span className="font-bebas text-3xl tracking-widest mt-1">INNOVATION LABS</span>
+                <Flame size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">CARBÓN CHICKEN</span>
+            </div>
+        )
+    },
+    {
+        node: (
+            <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
+                <Flame size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">CHICKEN BRASAS</span>
+            </div>
+        )
+    },
+    {
+        node: (
+            <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
+                <Drumstick size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">POLLERÍA DORADITO</span>
+            </div>
+        )
+    },
+    {
+        node: (
+            <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
+                <ChefHat size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">KOKU'S BURGER</span>
+            </div>
+        )
+    },
+    {
+        node: (
+            <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
+                <Bird size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">AVÍCOLA EL RICOTÓN</span>
+            </div>
+        )
+    },
+    {
+        node: (
+            <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
+                <Egg size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">AVÍCOLA BENAVIDES</span>
+            </div>
+        )
+    },
+    {
+        node: (
+            <div className="flex items-center gap-3 text-white/40 hover:text-[#01a2d8] transition-colors px-8">
+                <Dumbbell size={28} />
+                <span className="font-bebas text-3xl tracking-widest mt-1">GIMNASIO IRONBODY</span>
             </div>
         )
     }

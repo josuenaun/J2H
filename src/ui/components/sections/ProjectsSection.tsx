@@ -4,50 +4,52 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Monitor, Smartphone, Server, Users, CalendarClock, PenTool, ArrowDownRight } from 'lucide-react';
+// 🔥 Cambiamos PawPrint por Beef
+import { Dumbbell, ShoppingCart, Beef, CalendarCheck, Fingerprint, PenTool, ArrowDownRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const PROJECTS = [
     {
-        id: "gymsoftware",
-        title: "GYMSOFTWARE",
+        id: "allgym",
+        title: "ALLGYM",
         description: "Plataforma SaaS multi-tenant diseñada para escalar operaciones de cadenas fitness. Implementa una arquitectura robusta que gestiona miles de membresías activas, procesa pagos recurrentes automatizados mediante pasarelas seguras y ofrece un dashboard analítico en tiempo real. La infraestructura en la nube garantiza cero caídas durante las horas pico de acceso a los establecimientos, sincronizando molinetes de entrada con la base de datos principal.",
         tech: ["React", ".NET C#", "Tailwind"],
-        icon: <Monitor size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        icon: <Dumbbell size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
     },
     {
         id: "allfood",
         title: "ALLFOOD",
         description: "Ecosistema integral de delivery y logística de última milla optimizado para operaciones de alto volumen en grandes cadenas de pollerías. Cuenta con seguimiento de flotas por geolocalización en tiempo real, enrutamiento inteligente para repartidores y un motor de pedidos capaz de soportar picos masivos de concurrencia los fines de semana. La sincronización de estados asegura una experiencia perfecta y sin fricciones entre la cocina y el cliente final.",
-        tech: ["Swift", "React Native", "Firebase"],
-        icon: <Smartphone size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        tech: ["VB.NET", "MsSQL", "Windows Forms"],
+        icon: <ShoppingCart size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
     },
     {
         id: "imeat",
-        title: "IMEAT",
-        description: "Sistema ERP de grado industrial construido para transformar digitalmente el sector avícola. El núcleo del software asegura una trazabilidad milimétrica desde la planta de procesamiento hasta el distribuidor, integrando captura de datos directa desde balanzas electrónicas mediante protocolos IoT. Optimiza el control de mermas, la gestión de almacenes frigoríficos y automatiza las proyecciones de stock con un motor de base de datos de alta disponibilidad.",
-        tech: ["Vite", "C# .NET", "SQL Server"],
-        icon: <Server size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        title: "iMEAT",
+        description: "Sistema ERP de grado industrial construido para transformar digitalmente el sector avícola y cárnico. El núcleo del software asegura una trazabilidad milimétrica desde la planta de procesamiento hasta el distribuidor, integrando captura de datos directa desde balanzas electrónicas mediante protocolos IoT. Optimiza el control de mermas, la gestión de almacenes frigoríficos y automatiza las proyecciones de stock.",
+        tech: ["C# .NET", "ASPNETCORE API", "Blazor Hybrid", "MsSQL"],
+        // 🔥 Icono de sector cárnico actualizado
+        icon: <Beef size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
     },
     {
-        id: "sistema-asistencias",
-        title: "SISTEMA DE ASISTENCIAS",
-        description: "Solución empresarial para la gestión de capital humano con un enfoque crítico en la seguridad e inmutabilidad de los datos. El sistema procesa miles de registros diarios mediante integración directa con hardware biométrico avanzado, aplicando reglas de negocio complejas para calcular automáticamente horas extras, tardanzas y penalidades. Incluye un generador de reportes dinámicos que agiliza exponencialmente el flujo de nóminas del departamento de RRHH.",
-        tech: ["React", "Node.js", "PostgreSQL"],
-        icon: <Users size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        id: "owlcheck",
+        title: "OWLCHECK",
+        description: "Motor de planificación inteligente que resuelve el complejo desafío logístico de los horarios corporativos. Utiliza algoritmos de prevención de colisiones para asignar turnos de manera equitativa, considerando restricciones legales, vacaciones y disponibilidad del personal. Su interfaz gráfica permite a los gerentes arrastrar y soltar turnos en tiempo real, validando la cobertura de áreas críticas.",
+        tech: ["ASPNETCORE API", "Blazor Hybrid", "MsSQL"],
+        icon: <CalendarCheck size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
     },
     {
-        id: "owl-schedule",
-        title: "OWL SCHEDULE",
-        description: "Motor de planificación inteligente que resuelve el complejo desafío logístico de los horarios corporativos. Utiliza algoritmos de prevención de colisiones para asignar turnos de manera equitativa, considerando restricciones legales, vacaciones y disponibilidad del personal. Su interfaz gráfica permite a los gerentes arrastrar y soltar turnos en tiempo real, validando la cobertura de áreas críticas y alertando sobre posibles cuellos de botella operativos.",
-        tech: ["Next.js", "TypeScript", "Tailwind"],
-        icon: <CalendarClock size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        id: "authcore",
+        title: "AUTHCORE",
+        description: "Solución empresarial de autenticación y gestión de accesos con un enfoque crítico en la seguridad e inmutabilidad de los datos. El sistema procesa miles de registros diarios mediante integración directa con hardware biométrico avanzado, aplicando reglas de negocio complejas para el control perimetral y centralizando la identidad de los usuarios en ecosistemas distribuidos.",
+        tech: ["ASPNETCORE API", "Blazor Hybrid", "MsSQL"],
+        icon: <Fingerprint size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
     },
     {
         id: "drawiu",
         title: "DRAWIU",
-        description: "Aplicación web de vanguardia orientada a la comunidad creativa. Basada en un motor gráfico Canvas optimizado, permite el dibujo digital fluido y sin latencia directamente en el navegador. Incorpora un ecosistema de colaboración en tiempo real, donde múltiples usuarios pueden bosquejar simultáneamente, mientras un gestor de estados global maneja de manera inmaculada la complejidad de las capas vectoriales, historiales de acciones y herramientas de diseño.",
+        description: "Aplicación web de vanguardia orientada a la comunidad creativa. Basada en un motor gráfico Canvas optimizado, permite el dibujo digital fluido y sin latencia directamente en el navegador. Incorpora un ecosistema de colaboración en tiempo real, donde múltiples usuarios pueden bosquejar simultáneamente, mientras un gestor de estados global maneja de manera inmaculada la complejidad de las capas vectoriales.",
         tech: ["React", "Canvas API", "Zustand"],
         icon: <PenTool size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
     }
@@ -83,7 +85,6 @@ export const ProjectsSection = () => {
         <section
             id="proyectos"
             ref={sectionRef}
-            // JOSHUA: Eliminamos bg-[#050505] y lo dejamos en bg-transparent
             className="relative bg-transparent text-white border-t border-white/5"
         >
             <div className="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row relative">
