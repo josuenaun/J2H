@@ -135,8 +135,8 @@ export const TrustedBySection = () => {
                 <p className="trusted-anim text-center text-[#01a2d8] tracking-[0.3em] text-xs md:text-sm font-medium uppercase drop-shadow-md">
                     Respaldados por la industria
                 </p>
-                <h2 className="trusted-anim font-bebas text-4xl md:text-5xl text-white/90 mt-4 tracking-wide text-center">
-                    CLIENTES DE CONFIANZA
+                <h2 className="trusted-anim font-bebas text-4xl md:text-5xl text-white mt-4 tracking-wide text-center">
+                    CLIENTES DE <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#01a2d8] to-white/50">CONFIANZA</span>
                 </h2>
             </div>
 

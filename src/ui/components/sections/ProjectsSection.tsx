@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 // 🔥 Cambiamos PawPrint por Beef
-import { Dumbbell, ShoppingCart, Beef, CalendarCheck, Fingerprint, PenTool, ArrowDownRight } from 'lucide-react';
+import { Dumbbell, ShoppingCart, Beef, Fingerprint, PenTool, ArrowDownRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,7 +37,16 @@ const PROJECTS = [
         title: "OWLCHECK",
         description: "Motor de planificación inteligente que resuelve el complejo desafío logístico de los horarios corporativos. Utiliza algoritmos de prevención de colisiones para asignar turnos de manera equitativa, considerando restricciones legales, vacaciones y disponibilidad del personal. Su interfaz gráfica permite a los gerentes arrastrar y soltar turnos en tiempo real, validando la cobertura de áreas críticas.",
         tech: ["ASPNETCORE API", "Blazor Hybrid", "MsSQL"],
-        icon: <CalendarCheck size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        // 🔥 SVG de Búho personalizado estilo Lucide
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#01a2d8]">
+                <path d="M5 10.5V7a2 2 0 0 1 2-2h1.5l2 2h3l2-2H17a2 2 0 0 1 2 2v3.5" />
+                <path d="M5 10.5C5 16 8.5 22 12 22s7-6 7-11.5" />
+                <circle cx="8.5" cy="11.5" r="2.5" />
+                <circle cx="15.5" cy="11.5" r="2.5" />
+                <path d="M12 14v3" />
+            </svg>
+        )
     },
     {
         id: "authcore",
