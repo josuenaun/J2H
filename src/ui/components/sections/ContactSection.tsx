@@ -4,11 +4,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import emailjs from '@emailjs/browser'; // 🔥 1. Importamos EmailJS
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const ContactSection = () => {
     const sectionRef = useRef<HTMLElement>(null);
+    const formRef = useRef<HTMLFormElement>(null); // 🔥 2. Creamos la referencia al formulario
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSent, setIsSent] = useState(false);
 
@@ -28,18 +30,37 @@ export const ContactSection = () => {
         });
     }, { scope: sectionRef });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        setTimeout(() => {
-            setIsSubmitting(false);
+        try {
+            // 🔥 DEBUG: Verificamos si Vite está leyendo las llaves
+            console.log("Service ID:", import.meta.env.VITE_EMAILJS_SERVICE_ID);
+            console.log("Template ID:", import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
+            console.log("Public Key:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+            await emailjs.sendForm(
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                formRef.current!,
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+            );
+
+            // Si todo sale bien, mostramos éxito y limpiamos
             setIsSent(true);
+            formRef.current?.reset();
 
             setTimeout(() => {
                 setIsSent(false);
             }, 3000);
-        }, 1500);
+
+        } catch (error) {
+            console.error("Error enviando el correo:", error);
+            alert("Hubo un problema al enviar el mensaje. Verifica la consola.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -75,9 +96,8 @@ export const ContactSection = () => {
                             </div>
                             <div>
                                 <p className="text-white/40 text-sm font-medium tracking-wider uppercase mb-1">Email</p>
-                                {/* 🔥 EMAIL ACTUALIZADO */}
-                                <a href="mailto:contacto@j2hsoft.com" className="text-white text-lg hover:text-[#01a2d8] transition-colors">
-                                    contacto@j2hsoft.com
+                                <a href="mailto:jesus.naun@j2hsoft.com" className="text-white text-lg hover:text-[#01a2d8] transition-colors">
+                                    jesus.naun@j2hsoft.com
                                 </a>
                             </div>
                         </div>
@@ -89,7 +109,6 @@ export const ContactSection = () => {
                             </div>
                             <div>
                                 <p className="text-white/40 text-sm font-medium tracking-wider uppercase mb-1">Línea Directa</p>
-                                {/* 🔥 TELÉFONO ACTUALIZADO */}
                                 <a href="tel:+51946215658" className="text-white text-lg hover:text-[#01a2d8] transition-colors">
                                     +51 946 215 658
                                 </a>
@@ -114,6 +133,7 @@ export const ContactSection = () => {
                 {/* COLUMNA DERECHA: Formulario Glassmorphism */}
                 <div className="w-full lg:w-1/2 contact-anim">
                     <form
+                        ref={formRef} // 🔥 4. Conectamos la referencia al HTML
                         onSubmit={handleSubmit}
                         className="relative w-full bg-white/[0.03] backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)]"
                     >
@@ -125,6 +145,7 @@ export const ContactSection = () => {
                                 <label className="text-white/60 text-sm tracking-wide">Nombre Completo</label>
                                 <input
                                     type="text"
+                                    name="user_name" // 🔥 5. Variables para EmailJS
                                     required
                                     className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#01a2d8]/50 focus:ring-1 focus:ring-[#01a2d8]/50 transition-all"
                                     placeholder="Ej. John Doe"
@@ -134,6 +155,7 @@ export const ContactSection = () => {
                                 <label className="text-white/60 text-sm tracking-wide">Empresa</label>
                                 <input
                                     type="text"
+                                    name="user_company" // 🔥 Variables para EmailJS
                                     className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#01a2d8]/50 focus:ring-1 focus:ring-[#01a2d8]/50 transition-all"
                                     placeholder="Tu compañía"
                                 />
@@ -144,6 +166,7 @@ export const ContactSection = () => {
                             <label className="text-white/60 text-sm tracking-wide">Correo Corporativo</label>
                             <input
                                 type="email"
+                                name="user_email" // 🔥 Variables para EmailJS
                                 required
                                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#01a2d8]/50 focus:ring-1 focus:ring-[#01a2d8]/50 transition-all"
                                 placeholder="john@empresa.com"
@@ -153,6 +176,7 @@ export const ContactSection = () => {
                         <div className="flex flex-col gap-2 mb-8">
                             <label className="text-white/60 text-sm tracking-wide">Detalles del Proyecto</label>
                             <textarea
+                                name="message" // 🔥 Variables para EmailJS
                                 required
                                 rows={4}
                                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#01a2d8]/50 focus:ring-1 focus:ring-[#01a2d8]/50 transition-all resize-none"

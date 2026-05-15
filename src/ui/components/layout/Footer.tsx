@@ -86,7 +86,7 @@ export const Footer = () => {
                             {/* 🔥 EMAIL ACTUALIZADO */}
                             <li className="flex items-start gap-3 text-white/50 text-sm">
                                 <Mail size={16} className="mt-0.5 text-[#01a2d8]" />
-                                <a href="mailto:contacto@j2hsoft.com" className="hover:text-white transition-colors">contacto@j2hsoft.com</a>
+                                <a href="mailto:contacto@j2hsoft.com" className="hover:text-white transition-colors">jesus.naun@j2hsoft.com</a>
                             </li>
                             {/* 🔥 TELÉFONO AÑADIDO AL FOOTER */}
                             <li className="flex items-start gap-3 text-white/50 text-sm">
