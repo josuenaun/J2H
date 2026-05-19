@@ -4,18 +4,58 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-// 🔥 Cambiamos PawPrint por Beef
-import { Dumbbell, ShoppingCart, Beef, Fingerprint, PenTool, ArrowDownRight } from 'lucide-react';
+
+// 🔥 IMPORTAMOS TODOS TUS ACTIVOS PNG
+import beargymLogoPng from '../../../assets/images/beargym-logo.png';
+import imeatLogoPng from '../../../assets/images/imeat-logo.png';
+import owlcheckLogoPng from '../../../assets/images/owlcheck-logo.png';
+import authwolfLogoPng from '../../../assets/images/authwolf-logo.png';
+
+// Lucide para los proyectos que aún no tienen logo personalizado
+import { ShoppingCart, PenTool, ArrowDownRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// 🛠️ ESTILOS BASE REUTILIZABLES PARA EL EFECTO NEÓN (CSS Puro para seguridad de renderizado)
+const baseNeonStyle: React.CSSProperties = {
+    mixBlendMode: 'screen', // Transparencia mágica basada en fondo negro
+    filter: 'drop-shadow(0px 0px 6px rgba(0,174,239,0.4))' // Brillo unificado
+};
+
+// 🛠️ COMPONENTE ESTÁNDAR (DRY) PARA LOS LOGOS NEÓN
+// Usamos w-14 h-14 scale-150 como estándar para iMeat, Owlcheck y AuthWolf.
+const StandardNeonIcon = ({ src, alt }: { src: string, alt: string }) => (
+    <div style={{ isolation: 'isolate' }} className="flex items-center justify-center w-full h-full">
+        <img
+            src={src}
+            alt={alt}
+            className="w-14 h-14 object-contain scale-150 transition-transform duration-300"
+            style={baseNeonStyle}
+        />
+    </div>
+);
+
 const PROJECTS = [
     {
-        id: "allgym",
-        title: "ALLGYM",
-        description: "Plataforma SaaS multi-tenant diseñada para escalar operaciones de cadenas fitness. Implementa una arquitectura robusta que gestiona miles de membresías activas, procesa pagos recurrentes automatizados mediante pasarelas seguras y ofrece un dashboard analítico en tiempo real. La infraestructura en la nube garantiza cero caídas durante las horas pico de acceso a los establecimientos, sincronizando molinetes de entrada con la base de datos principal.",
+        id: "beargym",
+        title: "BEARGYM",
+        description: "Plataforma SaaS multi-tenant diseñada para escalar operaciones de cadenas fitness bajo la nueva identidad BearGym. Implementa una arquitectura robusta que gestiona miles de membresías activas, procesa pagos recurrentes automatizados mediante pasarelas seguras y ofrece un dashboard analítico en tiempo real. La infraestructura en la nube garantiza cero caídas durante las horas pico de acceso a los establecimientos, sincronizando molinetes de entrada con la base de datos principal.",
         tech: ["React", ".NET C#", "Tailwind"],
-        icon: <Dumbbell size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        // 🔥 AGRANDAMOS ESPECÍFICAMENTE EL OSO Y LO CENTRAMOS PERFECTAMENTE
+        // En lugar de usar <StandardNeonIcon />, pegamos la estructura subyacente y aumentamos tamaño base y escala.
+        icon: (
+            <div style={{ isolation: 'isolate' }} className="flex items-center justify-center w-full h-full">
+                <img
+                    src={beargymLogoPng}
+                    alt="BearGym Logo"
+                    // Original: w-14 h-14 scale-150
+                    // Agrandado y Centrado (con override): w-16 h-16 scale-125 translate-y-[-4px]
+                    // 🔥 ARREGLO AQUÍ: Redujimos escala para dar aire y subimos 4px.
+                    className="w-16 h-16 object-contain scale-165 transition-transform duration-300 translate-y-[-4px]"
+                    style={baseNeonStyle}
+                />
+            </div>
+        )
     },
     {
         id: "allfood",
@@ -29,36 +69,26 @@ const PROJECTS = [
         title: "iMEAT",
         description: "Sistema ERP de grado industrial construido para transformar digitalmente el sector avícola y cárnico. El núcleo del software asegura una trazabilidad milimétrica desde la planta de procesamiento hasta el distribuidor, integrando captura de datos directa desde balanzas electrónicas mediante protocolos IoT. Optimiza el control de mermas, la gestión de almacenes frigoríficos y automatiza las proyecciones de stock.",
         tech: ["C# .NET", "ASPNETCORE API", "Blazor Hybrid", "MsSQL"],
-        // 🔥 Icono de sector cárnico actualizado
-        icon: <Beef size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        icon: <StandardNeonIcon src={imeatLogoPng} alt="iMeat Logo" />
     },
     {
         id: "owlcheck",
         title: "OWLCHECK",
         description: "Motor de planificación inteligente que resuelve el complejo desafío logístico de los horarios corporativos. Utiliza algoritmos de prevención de colisiones para asignar turnos de manera equitativa, considerando restricciones legales, vacaciones y disponibilidad del personal. Su interfaz gráfica permite a los gerentes arrastrar y soltar turnos en tiempo real, validando la cobertura de áreas críticas.",
         tech: ["ASPNETCORE API", "Blazor Hybrid", "MsSQL"],
-        // 🔥 SVG de Búho personalizado estilo Lucide
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#01a2d8]">
-                <path d="M5 10.5V7a2 2 0 0 1 2-2h1.5l2 2h3l2-2H17a2 2 0 0 1 2 2v3.5" />
-                <path d="M5 10.5C5 16 8.5 22 12 22s7-6 7-11.5" />
-                <circle cx="8.5" cy="11.5" r="2.5" />
-                <circle cx="15.5" cy="11.5" r="2.5" />
-                <path d="M12 14v3" />
-            </svg>
-        )
+        icon: <StandardNeonIcon src={owlcheckLogoPng} alt="OwlCheck Logo" />
     },
     {
-        id: "authcore",
-        title: "AUTHCORE",
+        id: "authwolf",
+        title: "AuthWolf",
         description: "Solución empresarial de autenticación y gestión de accesos con un enfoque crítico en la seguridad e inmutabilidad de los datos. El sistema procesa miles de registros diarios mediante integración directa con hardware biométrico avanzado, aplicando reglas de negocio complejas para el control perimetral y centralizando la identidad de los usuarios en ecosistemas distribuidos.",
         tech: ["ASPNETCORE API", "Blazor Hybrid", "MsSQL"],
-        icon: <Fingerprint size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        icon: <StandardNeonIcon src={authwolfLogoPng} alt="AuthWolf Logo" />
     },
     {
         id: "drawiu",
         title: "DRAWIU",
-        description: "Aplicación web de vanguardia orientada a la comunidad creativa. Basada en un motor gráfico Canvas optimizado, permite el dibujo digital fluido y sin latencia directamente en el navegador. Incorpora un ecosistema de colaboración en tiempo real, donde múltiples usuarios pueden bosquejar simultáneamente, mientras un gestor de estados global maneja de manera inmaculada la complejidad de las capas vectoriales.",
+        description: "Aplicación web de vanguardia orientada a la community creativa. Basada en un motor gráfico Canvas optimizado, permite el dibujo digital fluido y sin latencia directamente en el navegador. Incorpora un ecosistema de colaboración en tiempo real, donde múltiples usuarios pueden bosquejar simultáneamente, mientras un gestor de estados global maneja de manera inmaculada la complejidad de las capas vectoriales.",
         tech: ["React", "Canvas API", "Zustand"],
         icon: <PenTool size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
     }
@@ -129,7 +159,7 @@ export const ProjectsSection = () => {
                                 </h3>
                                 <p className="text-white/60 leading-[1.8] text-base md:text-[1.05rem] mb-8 font-light tracking-wide text-justify md:text-left relative z-10">
                                     {project.description}
-                                </p>
+                                    )</p>
                             </div>
 
                             <div className="flex justify-between items-end relative z-10 mt-auto pt-6 border-t border-white/5">
