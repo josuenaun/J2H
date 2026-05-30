@@ -10,9 +10,10 @@ import beargymLogoPng from '../../../assets/images/beargym-logo.png';
 import imeatLogoPng from '../../../assets/images/imeat-logo.png';
 import owlcheckLogoPng from '../../../assets/images/owlcheck-logo.png';
 import authwolfLogoPng from '../../../assets/images/authwolf-logo.png';
+import foxposLogoPng from '../../../assets/images/foxpos_logo.png';
 
 // Lucide para los proyectos que aún no tienen logo personalizado
-import { ShoppingCart, PenTool, ArrowDownRight } from 'lucide-react';
+import { ShoppingCart, ArrowDownRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,11 +87,11 @@ const PROJECTS = [
         icon: <StandardNeonIcon src={authwolfLogoPng} alt="AuthWolf Logo" />
     },
     {
-        id: "drawiu",
-        title: "DRAWIU",
-        description: "Aplicación web de vanguardia orientada a la community creativa. Basada en un motor gráfico Canvas optimizado, permite el dibujo digital fluido y sin latencia directamente en el navegador. Incorpora un ecosistema de colaboración en tiempo real, donde múltiples usuarios pueden bosquejar simultáneamente, mientras un gestor de estados global maneja de manera inmaculada la complejidad de las capas vectoriales.",
-        tech: ["React", "Canvas API", "Zustand"],
-        icon: <PenTool size={32} className="text-[#01a2d8]" strokeWidth={1.5} />
+        id: "foxpos",
+        title: "FOXPOS",
+        description: "Sistema de punto de venta (POS) de última generación diseñado para agilizar transacciones comerciales, control de inventario en tiempo real, gestión de cajas y catálogo de productos. Su arquitectura híbrida permite operaciones estables sin conexión a internet y sincronización en la nube.",
+        tech: ["Maui Blazor Hybrid", "ASP.NET Core API", "Minimal APIs", ".NET 10", "C#", "SQLite", "MySQL"],
+        icon: <StandardNeonIcon src={foxposLogoPng} alt="FoxPOS Logo" />
     }
 ];
 
